@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konsultacija — Marco Group</title>
+<meta name="description" content="Nežinote, kurį modelį rinktis? Papasakokite apie savo įmonę — atrinksime tinkamiausius modelius pasimatavimui.">
+<link rel="icon" type="image/png" href="marco-mark-dark.png">
+<meta property="og:site_name" content="Marco Group">
+<meta property="og:type" content="website">
+<meta property="og:image" content="marco-logo-dark.png">
+<meta property="og:title" content="Konsultacija — Marco Group">
+<meta property="og:description" content="Nežinote, kurį modelį rinktis? Papasakokite apie savo įmonę — atrinksime tinkamiausius modelius pasimatavimui.">
+<link rel="canonical" href="https://striukestau.lt/konsultacija.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="1.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo" style="display:flex; align-items:center; gap:12px;"><img src="marco-mark-dark.png" alt="Marco Group" style="height:36px;width:auto;display:block;"><span>Marco Group</span></a>
+    <nav>
+      <ul>
+        <li><a href="kolekcija.html?season=pavasaris-ruduo">Pavasaris / Ruduo</a></li>
+        <li><a href="kolekcija.html?season=ziema">Žiema</a></li>
+        <li><a href="konsultacija.html" class="active">Konsultacija</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <h1>Stilingos striukės <strong>jūsų įmonės komandai.</strong></h1>
+    </div>
+  </div>
+</section>
+
+<section class="consult-hero">
+  <div class="wrap reveal">
+    <span class="label">Konsultacija</span>
+    <h1>Nežinote, kurį modelį rinktis?</h1>
+    <p>Parašykite trumpai apie savo įmonės veiklos pobūdį — atrinksime ir atvešime 3 tinkamiausius modelius pasimatavimui į Jūsų biurą. Pristatymas nemokamas.</p>
+  </div>
+</section>
+
+<section class="consult-form">
+  <div class="wrap reveal">
+    <form id="consult-form">
+      <div class="field">
+        <label>Kuo užsiima Jūsų įmonė?</label>
+        <textarea id="c-activity" placeholder="Pvz. logistika, biuro paslaugos, statyba..." required></textarea>
+      </div>
+      <div class="field">
+        <label>Kiek žmonių reikėtų aprengti?</label>
+        <input type="text" id="c-size" placeholder="Pvz. 12 žmonių" required>
+      </div>
+      <div class="field">
+        <label>Ar reikės įmonės logotipo ant striukės?</label>
+        <input type="text" id="c-logo" placeholder="Taip / Ne / Dar nesu tikras(-a)" required>
+      </div>
+      <div class="field"><label>Vardas</label><input type="text" id="c-name" required></div>
+      <div class="field"><label>Įmonė</label><input type="text" id="c-company" required></div>
+      <div class="field"><label>Tel. nr.</label><input type="tel" id="c-phone" required></div>
+      <div class="field"><label>El. paštas</label><input type="email" id="c-email" required></div>
+      <button type="submit" class="btn full" id="consult-submit-btn">Siųsti užklausą</button>
+      <p class="form-status" id="consult-status"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <img src="marco-logo-light.png" alt="Marco Group" style="height:34px; width:auto; margin-bottom:14px; opacity:0.85;">
+      <p style="font-size:13px; color:#726F65; max-width:220px;">AB Marcogroup<br>Lazdynėlių g. 38-14, Vilnius</p>
+    </div>
+    <div class="f-col">
+      <span class="label">Kontaktai</span>
+      <a href="tel:+37065477587">+370 654 77587</a>
+      <a href="mailto:info@striukestau.lt">info@striukestau.lt</a>
+    </div>
+  </div>
+  <div class="wrap f-bottom">© 2026 AB Marcogroup · <a href="privatumo-politika.html" style="color:inherit;">Privatumo politika</a></div>
+</footer>
+
+<script src="5.js"></script>
+<script>
+document.getElementById('consult-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const v = id => document.getElementById(id).value;
+  const subject = 'Konsultacijos užklausa — ' + v('c-company');
+  const fields = {
+    'Veiklos pobūdis': v('c-activity'),
+    'Komandos dydis': v('c-size'),
+    'Logotipas': v('c-logo'),
+    'Vardas': v('c-name'),
+    'Įmonė': v('c-company'),
+    'Tel.': v('c-phone'),
+    'El. paštas': v('c-email')
+  };
+  const btn = document.getElementById('consult-submit-btn');
+  const statusEl = document.getElementById('consult-status');
+  btn.disabled = true;
+  btn.textContent = 'Siunčiama...';
+  sendLead(fields, subject,
+    (via) => {
+      btn.disabled = false;
+      btn.textContent = 'Siųsti užklausą';
+      if (via === 'formspree') {
+        statusEl.textContent = 'Užklausa išsiųsta — susisieksime greitai.';
+        statusEl.classList.add('ok');
+        document.getElementById('consult-form').reset();
+      }
+    },
+    () => {
+      btn.disabled = false;
+      btn.textContent = 'Siųsti užklausą';
+      statusEl.textContent = 'Nepavyko išsiųsti automatiškai — atidarėme Jūsų pašto klientą.';
+      statusEl.classList.add('err');
+    }
+  );
+});
+</script>
+
+<script src="6.js"></script>
+</body>
+</html>
