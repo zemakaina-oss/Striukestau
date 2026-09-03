@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Striukės ir darbo rūbai su logotipu įmonėms — Marco Group</title>
+<meta name="description" content="14 striukių / darbo rūbų modelių jūsų įmonės komandai — su logotipu arba be jo. Pavasario/Rudens ir Žiemos kolekcijos, nuo 5 vienetų.">
+<link rel="icon" type="image/png" href="marco-mark-dark.png">
+<meta property="og:site_name" content="Marco Group">
+<meta property="og:type" content="website">
+<meta property="og:image" content="marco-logo-dark.png">
+<meta property="og:title" content="Striukės ir darbo rūbai su logotipu įmonėms — Marco Group">
+<meta property="og:description" content="14 striukių / darbo rūbų modelių jūsų įmonės komandai — su logotipu arba be jo. Pavasario/Rudens ir Žiemos kolekcijos, nuo 5 vienetų.">
+<link rel="canonical" href="https://striukestau.lt/kolekcija.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="1.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo" style="display:flex; align-items:center; gap:12px;"><img src="marco-mark-dark.png" alt="Marco Group" style="height:36px;width:auto;display:block;"><span>Marco Group</span></a>
+    <nav>
+      <ul>
+        <li><a href="kolekcija.html?season=pavasaris-ruduo" id="nav-pr">Pavasaris / Ruduo</a></li>
+        <li><a href="kolekcija.html?season=ziema" id="nav-z">Žiema</a></li>
+        <li><a href="konsultacija.html">Konsultacija</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero hero-compact">
+  <div class="hero-bg" style="background-image:url('jacket-13.jpg');"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <h1>Modeliai <strong>jūsų komandai.</strong></h1>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:64px;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label">Kolekcija</span>
+      <h2>Modeliai jūsų komandai</h2>
+      <p>Kiekvieną modelį galime pristatyti standartinį arba su Jūsų įmonės logotipu. Užsakymai — nuo 5 vienetų.</p>
+    </div>
+
+    <div class="season-tabs">
+      <button class="season-tab" data-season="pavasaris-ruduo">Pavasaris / Ruduo</button>
+      <button class="season-tab" data-season="ziema">Žiema</button>
+    </div>
+
+    <div class="grid" id="product-grid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <img src="marco-logo-light.png" alt="Marco Group" style="height:34px; width:auto; margin-bottom:14px; opacity:0.85;">
+      <p style="font-size:13px; color:#726F65; max-width:220px;">MB Marcogroup<br>Lazdynėlių g. 38-14, Vilnius</p>
+    </div>
+    <div class="f-col">
+      <span class="label">Kontaktai</span>
+      <a href="tel:+37065477587">+370 654 77587</a>
+      <a href="konsultacija.html">Konsultacija</a>
+    </div>
+  </div>
+  <div class="wrap f-bottom">© 2026 MB Marcogroup · <a href="privatumo-politika.html" style="color:inherit;">Privatumo politika</a></div>
+</footer>
+
+<script src="2.js"></script>
+<script src="6.js"></script>
+<script>
+function renderGrid(season){
+  const grid = document.getElementById('product-grid');
+  grid.innerHTML = '';
+  const items = PRODUCTS.filter(p => p.season === season);
+  items.forEach((p, i) => {
+    const secondImg = p.images.length > 1 ? p.images[1] : p.images[0];
+    const num = PRODUCTS.indexOf(p) + 1;
+    const altText = p.name + ' su logotipu \u2014 Marco Group';
+    const a = document.createElement('a');
+    a.href = 'product.html?id=' + p.id;
+    a.className = 'p-card reveal reveal-stagger';
+    a.style.setProperty('--reveal-delay', (i % 3) * 90 + 'ms');
+    a.innerHTML = `
+      <div class="imgwrap">
+        ${p.featured ? '<span class="badge-featured">Perkamiausias</span>' : ''}
+        <img class="img-a" src="${p.images[0]}" alt="${altText}" loading="lazy">
+        <img class="img-b" src="${secondImg}" alt="${altText}" loading="lazy">
+      </div>
+      <div class="meta">
+        <h4><span class="p-number">Nr. ${num}</span>${p.name}</h4>
+        <span class="price">Nuo ${p.tiers[0].price}€</span>
+      </div>`;
+    grid.appendChild(a);
+  });
+  if (window.initReveal) window.initReveal();
+}
+
+function setActiveTab(season){
+  document.querySelectorAll('.season-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.season === season);
+  });
+  document.getElementById('nav-pr').classList.toggle('active', season === 'pavasaris-ruduo');
+  document.getElementById('nav-z').classList.toggle('active', season === 'ziema');
+}
+
+function selectSeason(season, updateUrl){
+  setActiveTab(season);
+  renderGrid(season);
+  if (updateUrl){
+    const url = new URL(window.location);
+    url.searchParams.set('season', season);
+    window.history.replaceState({}, '', url);
+  }
+}
+
+document.querySelectorAll('.season-tab').forEach(btn => {
+  btn.addEventListener('click', () => selectSeason(btn.dataset.season, true));
+});
+
+const params = new URLSearchParams(window.location.search);
+const initialSeason = params.get('season') === 'ziema' ? 'ziema' : 'pavasaris-ruduo';
+selectSeason(initialSeason, false);
+</script>
+
+</body>
+</html>
