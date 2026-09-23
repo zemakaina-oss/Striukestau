@@ -14,7 +14,7 @@ document.getElementById('pd-season').textContent = SEASONS[product.season];
 // kad kiekvienas produkto puslapis (?id=pXX) būtų traktuojamas kaip
 // atskiras, unikalus puslapis, o ne visi kaip vienas ir tas pats.
 (function updateSeoMeta(){
-  const pageUrl = 'https://striukestau.lt/product.html?id=' + product.id;
+  const pageUrl = 'https://striukestau.lt/product?id=' + product.id;
   const imageUrl = 'https://striukestau.lt/' + product.images[0];
   const shortDesc = product.name + ' su Jūsų įmonės logotipu. Nuo ' + product.tiers[0].price + '€/vnt., nemokamas pavyzdžio pristatymas.';
 
