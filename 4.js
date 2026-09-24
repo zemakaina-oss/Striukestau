@@ -38,10 +38,20 @@ document.getElementById('pd-season').textContent = SEASONS[product.season];
   if (ogImage) ogImage.setAttribute('content', imageUrl);
 })();
 
+// Klientų atsiliepimai (tik realūs, gauti raštu su leidimu skelbti)
+const MANTOMA = {
+  rating: 5,
+  author: "UAB „Mantoma“",
+  text: "UAB „Mantoma“ nuoširdžiai dėkoja už puikų bendradarbiavimą! Džiugina tai, kad šios striukės puikiai suderina puikią, draugišką kainą ir puikią kokybę. Tikrai sugrįšime dar ne kartą ir drąsiai rekomenduojame visiems, ieškantiems patikimų partnerių bei kokybiškos produkcijos!"
+};
+
+const REVIEWS = {
+  "p04": MANTOMA,   // Nr. 8 – Ilgesnio kirpimo striukė su gobtuvu
+  "p12": MANTOMA,   // Nr. 6 – Žieminė striukė su gobtuvu
+};
+
 // struktūrizuoti duomenys (Schema.org Product) - padeda Google paieškai
-const ldJson = document.createElement('script');
-ldJson.type = 'application/ld+json';
-ldJson.textContent = JSON.stringify({
+const productLd = {
   "@context": "https://schema.org",
   "@type": "Product",
   "name": product.name + " su logotipu",
@@ -53,9 +63,43 @@ ldJson.textContent = JSON.stringify({
     "priceCurrency": "EUR",
     "price": product.tiers[0].price,
     "availability": "https://schema.org/InStock",
-    "url": window.location.href
+    "url": window.location.href,
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": { "@type": "MonetaryAmount", "value": 0, "currency": "EUR" },
+      "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "LT" }
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "LT",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 14,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/ReturnShippingFees"
+    }
   }
-});
+};
+
+// Įvertinimas dedamas TIK tam modeliui, apie kurį atsiliepimas gautas,
+// ir tik kartu su matomu atsiliepimu puslapyje (žr. žemiau).
+const rev = REVIEWS[product.id];
+if (rev) {
+  productLd.aggregateRating = {
+    "@type": "AggregateRating",
+    "ratingValue": rev.rating,
+    "reviewCount": 1
+  };
+  productLd.review = [{
+    "@type": "Review",
+    "reviewRating": { "@type": "Rating", "ratingValue": rev.rating, "bestRating": 5 },
+    "author": { "@type": "Organization", "name": rev.author },
+    "reviewBody": rev.text
+  }];
+}
+
+const ldJson = document.createElement('script');
+ldJson.type = 'application/ld+json';
+ldJson.textContent = JSON.stringify(productLd);
 document.head.appendChild(ldJson);
 const productNumber = PRODUCTS.indexOf(product) + 1;
 document.getElementById('pd-name').innerHTML = '<span class="pd-number">Nr. ' + productNumber + '</span>' + product.name;
@@ -162,6 +206,19 @@ updateMatrix();
 
 // logotipo vizualizatorius
 initLogoTool(product.images[0]);
+
+// Matomas kliento atsiliepimas (privaloma, kad struktūriniai duomenys būtų teisėti)
+if (rev) {
+  const box = document.createElement('div');
+  box.style.cssText = 'border:1px solid var(--line); border-radius:var(--radius); padding:22px; margin-bottom:28px; background:#fff;';
+  box.innerHTML =
+    '<span class="label" style="display:block; margin-bottom:10px;">Kliento atsiliepimas</span>' +
+    '<div style="letter-spacing:2px; color:#C9A227; margin-bottom:10px;">★★★★★</div>' +
+    '<p style="font-size:14.5px; line-height:1.65; color:var(--ink); margin:0 0 12px;">„' + rev.text + '“</p>' +
+    '<p style="font-size:13px; color:var(--muted); margin:0;">' + rev.author + ' · ' + rev.rating + ' iš 5</p>';
+  const cta = document.getElementById('cta-btn');
+  cta.parentNode.insertBefore(box, cta);
+}
 
 // CTA modalas
 const modalOverlay = document.getElementById('modal-overlay');
