@@ -67,7 +67,22 @@ const productLd = {
     "shippingDetails": {
       "@type": "OfferShippingDetails",
       "shippingRate": { "@type": "MonetaryAmount", "value": 0, "currency": "EUR" },
-      "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "LT" }
+      "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "LT" },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 0, "unitCode": "DAY" },
+        "transitTime": { "@type": "QuantitativeValue", "minValue": 3, "maxValue": 7, "unitCode": "DAY" },
+        "businessDays": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "https://schema.org/Monday",
+            "https://schema.org/Tuesday",
+            "https://schema.org/Wednesday",
+            "https://schema.org/Thursday",
+            "https://schema.org/Friday"
+          ]
+        }
+      }
     },
     "hasMerchantReturnPolicy": {
       "@type": "MerchantReturnPolicy",
@@ -75,7 +90,7 @@ const productLd = {
       "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
       "merchantReturnDays": 14,
       "returnMethod": "https://schema.org/ReturnByMail",
-      "returnFees": "https://schema.org/ReturnShippingFees"
+      "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
     }
   }
 };
