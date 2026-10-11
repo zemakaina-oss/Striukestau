@@ -56,7 +56,7 @@ const PRODUCTS = [
     name: 'Žieminė striukė su gobtuvu',
     season: 'ziema',
     featured: true,
-    images: ['jacket-07.jpg','jacket-13.jpg','jacket-37.jpg','jacket-38.jpg','jacket-39.jpg','jacket-40.jpg','jacket-42.jpg','jacket-55.jpg'],
+    images: ['jacket-07.jpg','jacket-13.jpg','jacket-37.jpg','jacket-38.jpg','jacket-55.jpg'],
     sizes: ['48','50','52','54','56','58','60','62','64','66','68','70'],
     colors: ['Tamsiai mėlyna', 'Tamsiai chaki'],
     tiers: [{min:5,max:10,price:65},{min:11,max:20,price:45},{min:21,max:null,price:42}],
