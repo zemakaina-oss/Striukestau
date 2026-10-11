@@ -56,17 +56,17 @@ const PRODUCTS = [
     name: 'Žieminė striukė su gobtuvu',
     season: 'ziema',
     featured: true,
-    images: ['jacket-07.jpg','jacket-13.jpg'],
+    images: ['jacket-07.jpg','jacket-13.jpg','jacket-37.jpg','jacket-38.jpg','jacket-39.jpg','jacket-40.jpg','jacket-42.jpg','jacket-55.jpg'],
     sizes: ['48','50','52','54','56','58','60','62','64','66','68','70'],
     colors: ['Tamsiai mėlyna', 'Tamsiai chaki'],
     tiers: [{min:5,max:10,price:65},{min:11,max:20,price:45},{min:21,max:null,price:42}],
-    desc: 'Vidutinio ilgio, pilnai šilta žieminė striukė su reguliuojamu gobtuvu. Puikiai tinka tiek kasdieniam nešiojimui, tiek reprezentacinei aprangai. Prieinama dviem spalvomis: tamsiai mėlyna ir tamsiai chaki. Dydžiai – nuo 48 iki 70, todėl tinka visiems komandos nariams. Modelis nuotraukoje 197 cm ūgio. Užsakymai nuo 5 vienetų, o nuo 21 vieneto kaina už striukę mažiausia. Galime uždėti Jūsų įmonės logotipą, pristatymas visoje Lietuvoje nemokamas.'
+    desc: 'Vidutinio ilgio, pilnai šilta žieminė striukė su kupranugario vilnos užpildu ir reguliuojamu gobtuvu. Striukė lengva ir neišpūsta. Puikiai tinka tiek kasdieniam nešiojimui, tiek reprezentacinei aprangai. Prieinama dviem spalvomis: tamsiai mėlyna ir tamsiai chaki. Dydžiai – nuo 48 iki 70, todėl tinka visiems komandos nariams. Modelis nuotraukoje 197 cm ūgio. Užsakymai nuo 5 vienetų, o nuo 21 vieneto kaina už striukę mažiausia. Galime uždėti Jūsų įmonės logotipą, pristatymas visoje Lietuvoje nemokamas.'
   },
   {
     id: 'p06',
     name: 'Sportinė striukė',
     season: 'pavasaris-ruduo',
-    images: ['jacket-17.jpg','jacket-18.jpg','jacket-19.jpg'],
+    images: ['jacket-17.jpg','jacket-18.jpg','jacket-19.jpg','jacket-31.jpg','jacket-32.jpg','jacket-33.jpg','jacket-34.jpg'],
     tiers: [{min:5,max:10,price:55},{min:11,max:20,price:39},{min:21,max:null,price:36}],
     desc: 'Įprasto ilgio sportinė striukė šviesesne, kupranugario spalva. Turi reguliuojamą gobtuvą ir kelias kišenes. Tinka pavasariui ir rudeniui. Dydžiai – 48–58. Modelis nuotraukoje 197 cm ūgio. Užsakymai nuo 5 vienetų, o kuo didesnis kiekis, tuo pigiau kainuoja vienas vienetas. Galime uždėti Jūsų įmonės logotipą, pristatymas visoje Lietuvoje nemokamas.'
   },
