@@ -13,6 +13,30 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="1.css">
+<style>
+/* Kompiuteris: matoma visa nuotrauka (be apkirpimo) ir mažos nuotraukos apačioje.
+   Telefono vaizdas nekeičiamas. */
+@media (min-width: 900px) {
+  .pd-gallery { height: auto !important; max-height: none !important; overflow: visible !important; }
+  .pd-gallery-main { aspect-ratio: auto !important; height: auto !important; max-height: none !important; overflow: visible !important; }
+  .pd-gallery-main img#pd-main-img {
+    display: block !important;
+    width: auto !important; max-width: 100% !important;
+    height: auto !important; max-height: 68vh !important;
+    margin: 0 auto !important;
+    object-fit: contain !important;
+  }
+  .pd-gallery-thumbs {
+    display: flex !important; flex-wrap: wrap !important; gap: 8px !important;
+    margin-top: 12px !important; justify-content: center !important;
+  }
+  .pd-gallery-thumbs img {
+    display: block !important;
+    width: 64px !important; height: 80px !important;
+    object-fit: cover !important; cursor: pointer;
+  }
+}
+</style>
 </head>
 <body>
 
