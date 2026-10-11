@@ -18,11 +18,11 @@
    Telefono vaizdas nekeičiamas. */
 @media (min-width: 900px) {
   .pd-gallery { height: auto !important; max-height: none !important; overflow: visible !important; }
-  .pd-gallery-main { aspect-ratio: auto !important; height: auto !important; max-height: none !important; overflow: visible !important; background: transparent !important; padding: 0 !important; }
+  .pd-gallery-main { aspect-ratio: auto !important; height: auto !important; max-height: none !important; overflow: visible !important; background: transparent !important; padding: 0 !important; width: fit-content !important; max-width: 100% !important; margin: 0 auto !important; }
   .pd-gallery-main img#pd-main-img {
     display: block !important;
-    width: 100% !important; max-width: 100% !important;
-    height: auto !important; max-height: none !important;
+    width: auto !important; max-width: 100% !important;
+    height: auto !important; max-height: 72vh !important;
     margin: 0 !important;
     object-fit: contain !important;
   }
@@ -40,16 +40,16 @@
 .pd-gallery-main { position: relative; }
 .zoom-btn {
   position: absolute; top: 10px; left: 10px;
-  transform: scale(.9);
+  transform: scale(1);
   width: 32px; height: 32px; padding: 0; border: 0; border-radius: 50%;
   background: rgba(20,20,20,.6); color: #fff;
   display: flex; align-items: center; justify-content: center;
-  cursor: zoom-in; opacity: 0; pointer-events: none; z-index: 3;
+  cursor: zoom-in; opacity: .8; pointer-events: auto; z-index: 3;
   transition: opacity .2s, transform .2s, background .2s;
 }
 .zoom-btn svg { width: 16px; height: 16px; display: block; }
 .pd-gallery-main:hover .zoom-btn,
-.pd-gallery-main.show-zoom .zoom-btn { opacity: 1; pointer-events: auto; transform: scale(1); }
+.pd-gallery-main.show-zoom .zoom-btn { opacity: 1; }
 .zoom-btn:hover { background: rgba(20,20,20,.85); }
 .lb { position: fixed; inset: 0; background: rgba(10,10,10,.93); display: none; align-items: center; justify-content: center; z-index: 10000; }
 .lb.open { display: flex; }
@@ -233,6 +233,10 @@
   zb.setAttribute('aria-label', 'Padidinti nuotrauką');
   zb.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="15.5" y1="15.5" x2="21" y2="21"></line><line x1="10.5" y1="8" x2="10.5" y2="13"></line><line x1="8" y1="10.5" x2="13" y2="10.5"></line></svg>';
   wrap.appendChild(zb);
+  /* jei kitas kodas perpiešia nuotraukos langelį – stiklą grąžiname atgal */
+  if (window.MutationObserver) {
+    new MutationObserver(function () { if (!wrap.contains(zb)) wrap.appendChild(zb); }).observe(wrap, { childList: true });
+  }
 
   /* stiklas – nuotraukos apatiniame dešiniajame kampe */
   function placeZoom() {
