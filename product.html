@@ -138,5 +138,67 @@
 <script src="4.js"></script>
 
 <script src="6.js"></script>
+
+<script>
+/* Galerija: paspaudus didelę nuotrauką – kita nuotrauka; telefone – braukimas.
+   Naudoja jau esamas mažas nuotraukas (#pd-thumbs), todėl nieko kito nekeičia. */
+(function () {
+  var main = document.getElementById('pd-main-img');
+  var box = document.getElementById('pd-thumbs');
+  if (!main || !box) return;
+
+  var fallbackIdx = 0;
+
+  function thumbs() { return Array.prototype.slice.call(box.children); }
+  function imgOf(el) { return el.tagName === 'IMG' ? el : (el.querySelector('img') || el); }
+  function fileOf(src) { return (src || '').split('?')[0].split('/').pop(); }
+
+  function currentIndex(list) {
+    var cur = fileOf(main.getAttribute('src'));
+    var i;
+    if (cur) {
+      for (i = 0; i < list.length; i++) {
+        var im = imgOf(list[i]);
+        if (fileOf(im.getAttribute && im.getAttribute('src')) === cur) return i;
+      }
+    }
+    for (i = 0; i < list.length; i++) {
+      if (/(^|\s)(active|selected|current|on)(\s|$)/.test(list[i].className || '')) return i;
+    }
+    return fallbackIdx % list.length;
+  }
+
+  function go(step) {
+    var list = thumbs();
+    if (list.length < 2) return;
+    var next = (currentIndex(list) + step + list.length) % list.length;
+    fallbackIdx = next;
+    imgOf(list[next]).click();
+  }
+
+  main.style.cursor = 'pointer';
+  main.addEventListener('click', function () { go(1); });
+
+  var startX = null, startY = null, swiped = false;
+  main.addEventListener('touchstart', function (e) {
+    var t = e.changedTouches[0];
+    startX = t.clientX; startY = t.clientY; swiped = false;
+  }, { passive: true });
+  main.addEventListener('touchend', function (e) {
+    if (startX === null) return;
+    var t = e.changedTouches[0];
+    var dx = t.clientX - startX, dy = t.clientY - startY;
+    startX = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      swiped = true;
+      go(dx < 0 ? 1 : -1);
+    }
+  }, { passive: true });
+  /* braukimas nesukelia dvigubo perjungimo */
+  main.addEventListener('click', function (e) {
+    if (swiped) { e.stopImmediatePropagation(); swiped = false; }
+  }, true);
+})();
+</script>
 </body>
 </html>
