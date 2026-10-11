@@ -13,7 +13,7 @@ const PRODUCTS = [
     id: 'p01',
     name: 'Striukė su kupranugario užpildu',
     season: 'ziema',
-    images: ['jacket-01.jpg','jacket-02.jpg','jacket-03.jpg','jacket-11.jpg'],
+    images: ['jacket-01.jpg','jacket-58.jpg','jacket-03.jpg','jacket-11.jpg'],
     colors: ['Tamsiai mėlyna', 'Tamsiai chaki'],
     tiers: [{min:5,max:10,price:65},{min:11,max:20,price:45},{min:21,max:null,price:42}],
     desc: 'Šilta, įprasto ilgio žieminė striukė su kupranugario vilnos užpildu. Prieinama dviem spalvomis: tamsiai mėlyna ir tamsiai chaki. Dydžiai – 48–58. Užsakymai nuo 5 vienetų, o kuo didesnis kiekis, tuo mažesnė vieneto kaina. Galime uždėti Jūsų įmonės logotipą, pristatymas visoje Lietuvoje nemokamas.'
