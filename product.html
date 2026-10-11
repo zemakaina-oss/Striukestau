@@ -301,7 +301,7 @@
     var stage = lb.querySelector('.lb-stage');
     lb.querySelector('.lb-img').addEventListener('click', function (e) {
       e.stopPropagation();
-      if (scale > 1) setZoom(1); else setZoom(2.5, e);
+      if (scale > 1) setZoom(1); else setZoom(1.8, e);
     });
     stage.addEventListener('mousemove', function (e) { if (scale > 1) setZoom(scale, e); });
     stage.addEventListener('wheel', function (e) {
