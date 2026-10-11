@@ -18,12 +18,12 @@
    Telefono vaizdas nekeičiamas. */
 @media (min-width: 900px) {
   .pd-gallery { height: auto !important; max-height: none !important; overflow: visible !important; }
-  .pd-gallery-main { aspect-ratio: auto !important; height: auto !important; max-height: none !important; overflow: visible !important; }
+  .pd-gallery-main { aspect-ratio: auto !important; height: auto !important; max-height: none !important; overflow: visible !important; background: transparent !important; padding: 0 !important; }
   .pd-gallery-main img#pd-main-img {
     display: block !important;
-    width: auto !important; max-width: 100% !important;
-    height: auto !important; max-height: 68vh !important;
-    margin: 0 auto !important;
+    width: 100% !important; max-width: 100% !important;
+    height: auto !important; max-height: none !important;
+    margin: 0 !important;
     object-fit: contain !important;
   }
   .pd-gallery-thumbs {
@@ -36,52 +36,30 @@
     object-fit: cover !important; cursor: pointer;
   }
 }
-/* Didinamasis stiklas ir nuotraukos peržiūra */
-.pd-gallery-main { position: relative; }
-.pd-gallery-main img#pd-main-img { cursor: pointer; }
-.pd-zoom-btn {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(.85);
-  width: 68px; height: 68px; border-radius: 50%; border: 0; padding: 0;
-  background: rgba(255,255,255,.92); box-shadow: 0 4px 18px rgba(0,0,0,.28);
-  display: flex; align-items: center; justify-content: center; cursor: pointer;
-  opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 5;
-}
-.pd-zoom-btn.show { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
-.pd-zoom-btn svg { width: 32px; height: 32px; }
-.pd-lb { position: fixed; inset: 0; background: rgba(0,0,0,.93); z-index: 9999; display: none; align-items: center; justify-content: center; }
-.pd-lb.open { display: flex; }
-.pd-lb img { max-width: 94vw; max-height: 88vh; object-fit: contain; user-select: none; -webkit-user-drag: none; }
-.pd-lb button { position: absolute; border: 0; background: rgba(255,255,255,.16); color: #fff; cursor: pointer; border-radius: 50%; width: 46px; height: 46px; font-size: 26px; line-height: 1; display: flex; align-items: center; justify-content: center; }
-.pd-lb button:hover { background: rgba(255,255,255,.3); }
-.pd-lb .lb-close { top: 16px; right: 16px; }
-.pd-lb .lb-prev { left: 14px; top: 50%; transform: translateY(-50%); }
-.pd-lb .lb-next { right: 14px; top: 50%; transform: translateY(-50%); }
-.pd-lb .lb-count { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 14px; opacity: .8; }
-
 /* Didinimo stiklas ir nuotraukos išdidinimas */
 .pd-gallery-main { position: relative; }
 .zoom-btn {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%) scale(.9);
-  width: 64px; height: 64px; padding: 0; border: 0; border-radius: 50%;
+  position: absolute; top: 10px; left: 10px;
+  transform: scale(.9);
+  width: 32px; height: 32px; padding: 0; border: 0; border-radius: 50%;
   background: rgba(20,20,20,.6); color: #fff;
   display: flex; align-items: center; justify-content: center;
   cursor: zoom-in; opacity: 0; pointer-events: none; z-index: 3;
   transition: opacity .2s, transform .2s, background .2s;
 }
-.zoom-btn svg { width: 30px; height: 30px; display: block; }
+.zoom-btn svg { width: 16px; height: 16px; display: block; }
 .pd-gallery-main:hover .zoom-btn,
-.pd-gallery-main.show-zoom .zoom-btn { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+.pd-gallery-main.show-zoom .zoom-btn { opacity: 1; pointer-events: auto; transform: scale(1); }
 .zoom-btn:hover { background: rgba(20,20,20,.85); }
 .lb { position: fixed; inset: 0; background: rgba(10,10,10,.93); display: none; align-items: center; justify-content: center; z-index: 10000; }
 .lb.open { display: flex; }
-.lb-stage { overflow: hidden; display: flex; max-width: 92vw; max-height: 88vh; }
-.lb-img { max-width: 92vw; max-height: 88vh; object-fit: contain; user-select: none; -webkit-user-drag: none; cursor: zoom-in; transition: transform .15s ease-out; will-change: transform; }
-.lb-hint { position: absolute; top: 18px; left: 0; right: 0; text-align: center; color: #bbb; font-size: 13px; pointer-events: none; padding: 0 70px; }
-.lb-close { position: absolute; top: 12px; right: 18px; background: none; border: 0; color: #fff; font-size: 44px; line-height: 1; cursor: pointer; padding: 0 6px; }
-.lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.12); border: 0; color: #fff; font-size: 44px; width: 52px; height: 72px; cursor: pointer; border-radius: 6px; line-height: 1; }
+.lb-stage { overflow: hidden; display: flex; max-width: 100vw; max-height: 100vh; }
+.lb-img { height: 96vh; width: auto; max-width: 100vw; object-fit: contain; user-select: none; -webkit-user-drag: none; cursor: zoom-in; transition: transform .15s ease-out; will-change: transform; }
+.lb-hint { position: absolute; top: 18px; left: 0; right: 0; text-align: center; color: #eee; text-shadow: 0 1px 3px rgba(0,0,0,.8); font-size: 13px; pointer-events: none; padding: 0 70px; }
+.lb-close { position: absolute; top: 12px; right: 18px; z-index: 2; text-shadow: 0 1px 4px rgba(0,0,0,.8); background: none; border: 0; color: #fff; font-size: 44px; line-height: 1; cursor: pointer; padding: 0 6px; }
+.lb-prev, .lb-next { z-index: 2; position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.12); border: 0; color: #fff; font-size: 44px; width: 52px; height: 72px; cursor: pointer; border-radius: 6px; line-height: 1; }
 .lb-prev { left: 12px; } .lb-next { right: 12px; }
-.lb-count { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: #ddd; font-size: 14px; }
+.lb-count { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.8); font-size: 14px; pointer-events: none; }
 @media (max-width: 600px) { .lb-prev, .lb-next { width: 40px; height: 60px; font-size: 36px; } }
 </style>
 </head>
@@ -256,6 +234,17 @@
   zb.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="15.5" y1="15.5" x2="21" y2="21"></line><line x1="10.5" y1="8" x2="10.5" y2="13"></line><line x1="8" y1="10.5" x2="13" y2="10.5"></line></svg>';
   wrap.appendChild(zb);
 
+  /* stiklas – nuotraukos apatiniame dešiniajame kampe */
+  function placeZoom() {
+    var size = zb.offsetWidth || 32, m = 12;
+    zb.style.left = (main.offsetLeft + main.offsetWidth - size - m) + 'px';
+    zb.style.top = (main.offsetTop + main.offsetHeight - size - m) + 'px';
+  }
+  main.addEventListener('load', placeZoom);
+  window.addEventListener('resize', placeZoom);
+  wrap.addEventListener('mouseenter', placeZoom);
+  placeZoom();
+
   /* --- išdidinimas (lightbox) --- */
   var lb = null, list = [], idx = 0, lbStartX = null;
 
@@ -351,7 +340,7 @@
   main.style.cursor = isTouch ? 'zoom-in' : 'pointer';
   main.addEventListener('click', function () {
     if (swiped) { swiped = false; return; }
-    if (isTouch) { wrap.classList.add('show-zoom'); }   /* telefone: palietus atsiranda stiklas */
+    if (isTouch) { placeZoom(); wrap.classList.add('show-zoom'); }   /* telefone: palietus atsiranda stiklas */
     else { go(1); }                                      /* kompiuteryje: kita nuotrauka */
   });
 
