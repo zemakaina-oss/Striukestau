@@ -16,8 +16,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="1.css">
 <style>
-/* Pranašumų blokas ant tamsaus (ne juodo) šiek tiek šviesesnio šilto grafito fono */
-.values { background: #4B463F !important; color: #F4F1EA !important; }
+/* Pranašumų blokas ant tamsaus (ne juodo) pilkai juodo fono (suderintas su apatiniu bloku) */
+.values { background: #222221 !important; color: #F4F1EA !important; }
 .values .value-block { background: transparent !important; border-color: rgba(244,241,234,.16) !important; }
 .values .value-block h3 { color: #F4F1EA !important; }
 .values .value-block p { color: rgba(244,241,234,.82) !important; }
@@ -179,5 +179,20 @@
 </footer>
 
 <script src="6.js"></script>
+<script>
+/* Pranašumų bloko fonas paimamas iš apatinio tamsaus bloko, kad spalvos tiksliai sutaptų */
+(function () {
+  var v = document.querySelector('.values');
+  if (!v) return;
+  function bg(sel) {
+    var e = document.querySelector(sel);
+    if (!e) return null;
+    var c = getComputedStyle(e).backgroundColor;
+    return (c && c !== 'rgba(0, 0, 0, 0)' && c !== 'transparent') ? c : null;
+  }
+  var c = bg('.contact-strip') || bg('footer');
+  if (c) v.style.setProperty('background', c, 'important');
+})();
+</script>
 </body>
 </html>
